@@ -1,0 +1,18 @@
+<div class="col-md-6">
+    <button mat-raised-button (click)="predict()">Make a prediction!</button>
+    <h3 style="margin-left:72px">Along with Goldman Sacs, Here is also the real-time price of the stock</h3>
+    <div class="loading-shade"  *ngIf="alive_stock">
+        <mat-spinner></mat-spinner>
+      </div>
+    <div style="display: block;">
+    <canvas baseChart width="700" height="250"
+                [datasets]="linePredictionData"
+                [labels]="linePredictionLabels"
+                [options]="linePredictionOptions"
+                [colors]="linePredictionColors"
+                [legend]="linePredictionLegend"
+                [chartType]="linePredictionType"
+                (chartHover)="predictionHovered($event)"
+                (chartClick)="predictionClicked($event)"></canvas>
+    </div>
+</div>

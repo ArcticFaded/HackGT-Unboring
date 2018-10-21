@@ -1,0 +1,48 @@
+<mat-grid-list cols="4" rowHeight="50px" style="margin-top:100px;">
+    <mat-grid-tile
+        *ngFor="let tile of tiles"
+        [colspan]="tile.cols"
+        [rowspan]="tile.rows"
+        [style.background]="tile.color">
+        <h1 *ngIf="tile.title === 'bar'">{{tile.text}}</h1>
+        <div class="row">
+            <h2 *ngIf="tile.title !== 'bar' && tile.title.indexOf('graph') === -1">{{tile.text}}</h2>
+            <h4>{{tile.subTitle}}</h4>
+            <h4>{{tile.subSubTitle}}</h4>
+        </div>
+        <div class="row" *ngIf="tile.title === 'row1-graph'">
+            <div class="col-md-6">
+                <div style="display: block;">
+                <canvas baseChart width="700" height="250"
+                            [datasets]="lineChartData"
+                            [labels]="lineChartLabels"
+                            [options]="lineChartOptions"
+                            [colors]="lineChartColors"
+                            [legend]="lineChartLegend"
+                            [chartType]="lineChartType"
+                            (chartHover)="chartHovered($event)"
+                            (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="container" *ngIf="tile.title === 'row2-graph'">
+            <div class="col-sm-4 text-center">
+                <canvas baseChart width="700" height="250"
+                    [data]="pieChartData"
+                    [labels]="pieChartLabels"
+                    [chartType]="pieChartType"
+                    [options]="pieChartOptions"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+            </div>
+        </div>
+        <div style="display: block" *ngIf="tile.title === 'row3-graph'">
+            <canvas baseChart width="700" height="200"
+                [datasets]="radarChartData"
+                [labels]="radarChartLabels"
+                [chartType]="radarChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+        </div>
+    </mat-grid-tile>
+</mat-grid-list>
